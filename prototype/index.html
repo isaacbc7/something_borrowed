@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kindred — Global Year Support Network · Interactive Prototype</title>
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div class="stage">
+
+  <!-- Demo control panel (not part of the app UI) -->
+  <aside class="demo-panel">
+    <h1>Kindred</h1>
+    <div class="sub">Global Year support network · clickable prototype</div>
+
+    <h2>View as</h2>
+    <div id="persona-list"></div>
+
+    <h2>Guided journeys</h2>
+    <div id="journey-list"></div>
+
+    <h2>Key flows</h2>
+    <div id="flow-list"></div>
+  </aside>
+
+  <!-- iPhone -->
+  <div class="phone">
+    <div class="phone-screen">
+      <div class="dynamic-island"></div>
+      <div class="statusbar">
+        <span>9:41</span>
+        <span class="sb-icons">
+          <svg class="ic sm" viewBox="0 0 24 24" fill="currentColor"><path d="M2 16h3v4H2zM7.7 12h3v8h-3zM13.3 8h3v12h-3zM19 4h3v16h-3z"/></svg>
+          <svg class="ic sm" viewBox="0 0 24 24" fill="currentColor"><path d="M12 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm-5.5-6.5a7.8 7.8 0 0 1 11 0l-1.8 1.8a5.2 5.2 0 0 0-7.4 0zM3 10a12 12 0 0 1 18 0l-1.8 1.8a9.4 9.4 0 0 0-14.4 0z"/></svg>
+          <svg class="ic" viewBox="0 0 28 14" fill="none"><rect x="1" y="1" width="22" height="12" rx="3.5" stroke="currentColor" stroke-opacity=".4"/><rect x="3" y="3" width="15" height="8" rx="1.8" fill="currentColor"/><path d="M25 5v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" fill-opacity=".4"/></svg>
+        </span>
+      </div>
+      <main id="screen" class="screen"></main>
+      <nav id="tabbar"></nav>
+      <div id="overlay"></div>
+      <div class="home-indicator"></div>
+    </div>
+  </div>
+
+</div>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
