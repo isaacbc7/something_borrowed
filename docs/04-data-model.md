@@ -70,8 +70,8 @@ Scheduled items deliver server-side on the target date in the student's timezone
 Escalations write a targeted, private notification to the chosen people only. No automatic broadcast under any condition.
 
 ### SupportGoal
-`studentId, targetAmount, raisedAmount, visibility (only_me | chosen circleIds), source (program integration or manual)`
-Coordinator dashboards may read a **coarse band** (e.g. "<50%", "50–80%", ">80%") only if the student opts in.
+`studentId, targetAmount, raisedAmount, visibility (only_me | chosen circleIds), donationFundId (external), donationProvider, lastSyncedAt`
+Fed one-way from the donation platform through the `DonationProvider` seam (see [09 · Donation integration](09-donation-integration.md)) — Kindred never processes gifts. `raisedAmount` is a synced read, not a source of truth. Coordinator dashboards may read a **coarse band** (e.g. "<50%", "50–80%", ">80%") only if the student opts in. `donationFundId` is written once when a Global Year admin verifies the student and Kindred calls `linkOrCreateFund`.
 
 ### Group (church/community) & Coordinator surfaces
 `Group: id, name, location, coordinatorUserIds[], studentIds[] (affiliation approved by student)`

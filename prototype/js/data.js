@@ -126,8 +126,8 @@ const DB = {
         sees: 'General updates, public prayer, non-sensitive needs' },
       { id: 'friends', name: 'Friends',            members: 12, icon: 'sparkle',
         sees: 'General updates, public prayer requests' },
-      { id: 'financial', name: 'Financial supporters', members: 9, icon: 'gift',
-        sees: 'Needs tied to financial support only' },
+      { id: 'financial', name: 'Ministry partners', members: 9, icon: 'gift',
+        sees: 'Needs tied to financial partnership only' },
     ],
     elijah: [
       { id: 'family',  name: 'Family',            members: 4,  icon: 'home',
@@ -144,8 +144,8 @@ const DB = {
         sees: 'Personal updates, family-only prayer, all needs' },
       { id: 'church',  name: 'Northgate Church',   members: 14, icon: 'people',
         sees: 'General updates, public prayer, non-sensitive needs' },
-      { id: 'financial', name: 'Financial supporters', members: 10, icon: 'gift',
-        sees: 'Needs tied to financial support only' },
+      { id: 'financial', name: 'Ministry partners', members: 10, icon: 'gift',
+        sees: 'Needs tied to financial partnership only' },
     ],
   },
 
@@ -379,7 +379,7 @@ const DB = {
   ],
 
   needCategories: [
-    'Prayer & spiritual support', 'Financial support', 'Travel support', 'Supplies',
+    'Prayer & spiritual support', 'Financial partnership', 'Travel support', 'Supplies',
     'Meals', 'Encouragement', 'Communication', 'Medical & wellness', 'Housing',
     'Family support', 'Practical help', 'Other',
   ],

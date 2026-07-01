@@ -36,6 +36,7 @@ The circle-based privacy model is *actually implemented*: switch personas and wa
 | [06 · Notification strategy](docs/06-notification-strategy.md) | Every notification type, its trigger, cadence, and anti-manipulation rules |
 | [07 · Accessibility](docs/07-accessibility.md) | Dynamic Type, contrast, VoiceOver, haptics, and reduced motion |
 | [08 · Prototype guide](docs/08-prototype-guide.md) | Personas, seeded content, and step-by-step journey scripts |
+| [09 · Donation integration](docs/09-donation-integration.md) | The `DonationProvider` seam, seamless setup-time linking, Kindful→Bloomerang, and the read-only "money is never the plot" model |
 
 ## The design language: "Between Two Places"
 
@@ -54,3 +55,11 @@ Kindred does not look like other apps, on purpose. The entire visual system is a
 The concept is grounded in the real Global Year program (globalyear.org): a Christian gap year sending 18–25-year-olds to locations like Guatemala, Cape Verde, Mexico, Italy, and Southeast Asia for language school, discipleship, cultural immersion, and ministry through the local church. Students are faith-supported and raise their own support (~$13,500–$15,500 for the year) — which is exactly why a coordinated, dignity-preserving support network matters.
 
 The "Just Ask" product direction informed one principle used throughout: **a need that is visible and specific gets met; a need that is vague or hidden does not.** Kindred applies that to needs, prayer, and encouragement alike — while keeping the student, never the ask, at the center.
+
+## Christian missions at the center
+
+Global Year is a Christian missions program — students are sent out to make disciples among the nations, supported through personal partnership development. Kindred's language reflects that plainly: sending churches, ministry partners, support-raising, commissioning, the field, prayer as the first pillar. The missions identity lives in the *structure and vocabulary*, not in decoration — Scripture and faith show up in students' own words and in encouragement, never plastered across the chrome.
+
+## Donation platform: a swappable seam
+
+Because a student's support money lives in Global Year's giving platform — historically **Kindful**, which **Bloomerang acquired in 2021** — Kindred integrates through a one-way [`DonationProvider`](prototype/js/donation.js) seam rather than wiring to any single vendor. When Global Year verifies a new student, Kindred auto-links (or creates) their partnership designation, then reads the support total into the student's **private** goal on a schedule. Kindred never processes a gift; "give" deep-links out to the compliant hosted page with the designation prefilled. Full rationale and the setup sequence are in [docs/09](docs/09-donation-integration.md).

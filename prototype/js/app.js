@@ -61,7 +61,7 @@ const dotClass = { thriving: 'dot-thriving', 'needs-care': 'dot-care', milestone
 /* Journal masthead — how every root page opens */
 function masthead(title, opts = {}) {
   return `<div class="masthead">
-    <div class="mh-top"><span>${opts.wordmark || 'Kindred — a Global Year correspondence'}</span>${opts.right || ''}</div>
+    <div class="mh-top"><span>${opts.wordmark || 'Kindred — a Global Year sending community'}</span>${opts.right || ''}</div>
     <div class="mh-date">${opts.date || 'Vol. I · Sep–May · Tuesday, July 1'}</div>
     <h1>${title}</h1>
   </div>`;
@@ -315,8 +315,8 @@ function renderTabs(active) {
 
 /* ---------- Onboarding ---------- */
 const OB_SLIDES = [
-  { glyphs: '✈︎ ✉︎ ☼︎', h: 'A year away.<br>Never out of reach.', p: 'Kindred is a correspondence — between one Global Year student in the field and the church, family, and friends holding the other end of the line.' },
-  { glyphs: '✚︎ ♡ ✳︎', h: 'Support that<br>knows what to do.', p: 'Real needs on ticket stubs you can claim. Real requests you can stamp with prayer. Letters that arrive on exactly the right day.' },
+  { glyphs: '✈︎ ✉︎ ☼︎', h: 'Sent to the nations.<br>Never sent alone.', p: 'Kindred keeps one Global Year student — sent out to make disciples — close to the sending church, family, and friends holding the other end of the line.' },
+  { glyphs: '✚︎ ♡ ✳︎', h: 'Partnership that<br>knows what to do.', p: 'Real needs on ticket stubs you can claim. Real requests you can stamp with prayer. Letters that arrive on exactly the right day.' },
   { glyphs: '☾︎ ❦ ⌂︎', h: 'The student holds<br>the pen. Always.', p: 'Every entry, need, and prayer has an audience the student chooses. Private stays private. That is the whole covenant.' },
 ];
 function rOnboarding() {
@@ -348,9 +348,9 @@ function rRole() {
   </div>
   <div class="section">
     ${[
-      ['student', '✈︎', 'I’m a Global Year student', 'Keep the journal. Share your year, your needs, and your prayers — with the people you choose.'],
-      ['supporter', '✉︎', 'I’m supporting a student', 'Parent, friend, mentor, church member — hold the home end of the correspondence.'],
-      ['coordinator', '⌂︎', 'I lead a church or group', 'Keep the sending ledger. Coordinate care and keep your community writing back.'],
+      ['student', '✈︎', 'I’m a Global Year student', 'Keep the journal. Share your year on the field, your needs, and your prayers — with the people you choose.'],
+      ['supporter', '✉︎', 'I’m a ministry partner', 'Family, friend, mentor, church member — hold the home end and help send them well.'],
+      ['coordinator', '⌂︎', 'I lead a sending church', 'Keep the sending ledger. Shepherd care around your students and keep the body writing back.'],
     ].map(([id, e, h, p]) => `
       <button class="role-card ${S.roleChoice === id ? 'on' : ''}" onclick="S.roleChoice='${id}';render()">
         <span class="rc-emoji">${e}</span>
@@ -389,7 +389,7 @@ function signupNext() {
 /* ---------- Student profile setup (4 steps) ---------- */
 function rSetup() {
   const step = S.setupStep;
-  const steps = ['About you', 'Where you’ll serve', 'Your story', 'Your circles'];
+  const steps = ['About you', 'Where you’ll serve', 'Your story', 'Partnership account', 'Your circles'];
   let body = '';
   if (step === 0) body = `
     <div class="tc mt-8">${avatarHTML({ initials: 'SK', hue: 'teal' }, 96)}
@@ -415,10 +415,26 @@ function rSetup() {
     <div class="field"><label>Short bio</label><textarea class="input">Raising the last of my support before joining the Cape Verde team in September — Christian school, kids’ ministry, and learning Kriolu.</textarea></div>
     <div class="field"><label>Why I’m doing Global Year</label><textarea class="input">On a short trip to Cape Verde with our church, a girl named Neusa asked when I was coming back. Global Year is my answer.</textarea></div>
     <div class="privacy-note">${ic('heart', 'ic sm')} <span>Your story is what supporters connect with most. You can edit it any time.</span></div>`;
-  if (step === 3) body = `
+  if (step === 3) {
+    const link = Donations.link({ id: 'sarah', name: 'Sarah Kim' });
+    const sum = Donations.summary('sarah');
+    body = `
+    <p class="muted small" style="line-height:1.6">When Global Year verifies your profile, Kindred connects your ministry-support account automatically. You don’t set anything up — your giving platform stays the system of record, and your support total simply flows in.</p>
+    <div class="card wash-forest mt-12">
+      <div class="hstack">${ic('link')} <h3>Partnership account connected</h3><span class="grow"></span><span class="chip c-forest">Verified</span></div>
+      <div class="list mt-12" style="border:0">
+        <div class="row" style="padding:9px 0"><span class="r-main"><span class="r-title" style="font-size:14px">Platform</span></span><span class="r-side">${esc(link.provider)}</span></div>
+        <div class="row" style="padding:9px 0"><span class="r-main"><span class="r-title" style="font-size:14px">Your designation</span></span><span class="r-side">${esc(link.designation)}</span></div>
+        <div class="row" style="padding:9px 0"><span class="r-main"><span class="r-title" style="font-size:14px">Support raised</span></span><span class="r-side">${sum.pct}% · synced</span></div>
+      </div>
+    </div>
+    <div class="privacy-note mt-12">${ic('lock', 'ic sm')} <span>Kindred never touches a gift. Your support total feeds only your <b>private</b> partnership goal — no one sees it unless you choose to share it.</span></div>
+    <div class="privacy-note mt-8">${ic('shield', 'ic sm')} <span>Was your church on Kindful? It moved to Bloomerang — Kindred connects to either, so nothing you already raised is lost.</span></div>`;
+  }
+  if (step === 4) body = `
     <p class="muted small" style="line-height:1.5">Circles decide who sees what. We’ll start you with these — invite people into the right one and everything else takes care of itself.</p>
     <div class="list mt-12">
-      ${[['home', 'Family', 'Personal updates, family prayer, all needs'], ['people', 'Home church', 'General updates, public prayer, needs'], ['sparkle', 'Friends', 'General updates and public prayer'], ['gift', 'Financial supporters', 'Only needs tied to financial support'], ['shield', 'Private care team', 'Deeper wellbeing check-ins — your safest space']]
+      ${[['home', 'Family', 'Personal updates, family prayer, all needs'], ['people', 'Home church', 'General updates, public prayer, needs'], ['sparkle', 'Friends', 'General updates and public prayer'], ['gift', 'Ministry partners', 'Only needs tied to financial partnership'], ['shield', 'Private care team', 'Deeper wellbeing check-ins — your safest space']]
         .map(([i, t, s]) => `<div class="row"><span class="row-icon" style="background:var(--tint-navy);color:var(--navy)">${ic(i)}</span><span class="r-main"><span class="r-title">${t}</span><span class="r-sub">${s}</span></span>${ic('check', 'ic sm')}</div>`).join('')}
     </div>`;
   $('#screen').className = 'screen no-tabs screen-anim';
@@ -428,7 +444,7 @@ function rSetup() {
   <div class="nav-large" style="padding-top:0"><h1 style="font-size:26px">${steps[step]}</h1></div>
   <div class="section" style="margin-top:12px">
     ${body}
-    <button class="btn btn-primary btn-block mt-16" onclick="setupNext()">${step < 3 ? 'Continue' : 'Finish — invite your people'}</button>
+    <button class="btn btn-primary btn-block mt-16" onclick="setupNext()">${step < 4 ? 'Continue' : 'Finish — invite your people'}</button>
   </div>`;
   renderTabs(null);
   // back button steps back through the flow
@@ -436,8 +452,8 @@ function rSetup() {
 }
 function setupNext() {
   haptic();
-  if (S.setupStep < 3) { S.setupStep++; render(); }
-  else { S.persona = 'sarah_setup_demo' in DB.personas ? 'sarah' : 'sarah'; toast('Profile ready! Now invite your first supporters', 'sparkle'); go('#/invite'); }
+  if (S.setupStep < 4) { S.setupStep++; render(); }
+  else { S.persona = 'sarah'; toast('Profile ready! Now invite your ministry partners', 'sparkle'); go('#/invite'); }
 }
 
 /* ---------- Supporter invitation flow (student-owned) ---------- */
@@ -640,12 +656,12 @@ function rStudentHome() {
 
   <div class="section">
     <div class="card wash-teal">
-      <div class="hstack">${ic('people')} <h3>You are supported by…</h3></div>
+      <div class="hstack">${ic('people')} <h3>Sent and held by…</h3></div>
       <div class="hstack mt-12">
         <span class="avatar-stack">
           ${['clay', 'teal', 'navy', 'forest', 'gold'].map((h, i) => `<span class="avatar sz-32 hue-${h}">${'DJMPK'[i]}</span>`).join('')}
         </span>
-        <span class="small muted grow">${s.supporters} people across ${DB.circles[s.id].length} circles — family, church, friends, and more.</span>
+        <span class="small muted grow">${s.supporters} people across ${DB.circles[s.id].length} circles — family, sending church, friends, ministry partners, and more.</span>
       </div>
       <button class="btn btn-soft btn-block btn-sm mt-12" onclick="go('#/circles')">Manage circles & invites</button>
     </div>
@@ -751,16 +767,18 @@ function openAnnounceSheet() {
     <h2>Announcement</h2>
     <div class="sheet-sub">Goes to a student’s support community — encouraging, never guilt-driven.</div>
     <div class="field"><label>To</label><input class="input" value="Sarah’s support community (29 people)"></div>
-    <div class="field"><label>Message</label><textarea class="input">Sarah is 45 days from Cape Verde and 68% funded. Sunday we’ll pray her out — and if you can help her book that flight, now’s the moment. Help is already on the way!</textarea></div>
-    <button class="btn btn-primary btn-block" onclick="closeSheet();toast('Announcement sent to 29 supporters','send')">Send</button>`);
+    <div class="field"><label>Message</label><textarea class="input">Sarah is 45 days from Cape Verde and 68% toward her support. Sunday we’ll commission and pray her out — and if the Lord’s prompting you to help her book that flight, now’s the moment. Help is already on the way!</textarea></div>
+    <button class="btn btn-primary btn-block" onclick="closeSheet();toast('Announcement sent to 29 partners','send')">Send</button>`);
 }
 function openCampaignSheet(sid) {
   const s = student(sid);
+  const sum = Donations.summary(sid);
   openSheet(`
     <h2>Rally around ${esc(s.name.split(' ')[0])}</h2>
-    <div class="sheet-sub">Her flight books in 45 days. Coordinate the final stretch without a single guilt trip.</div>
+    <div class="sheet-sub">She’s ${sum ? sum.pct + '% toward her year of support' : 'close'} and her flight books in 45 days. Coordinate the final stretch — no guilt trips, just the body of Christ showing up.</div>
     <div class="card wash-gold">${needCardInline('n-sarah-flight')}</div>
-    <button class="btn btn-gold btn-block mt-12" onclick="closeSheet();toast('Campaign shared with Northgate — 14 supporters notified','send')">Share with the church</button>
+    <button class="btn btn-gold btn-block mt-12" onclick="closeSheet();toast('Partnership push shared with Northgate — 14 partners notified','send')">Share with the church</button>
+    <button class="btn btn-soft btn-block" onclick="closeSheet();openGiveSheet('${sid}')">Partner financially now →</button>
     <button class="btn btn-ghost btn-block" onclick="closeSheet();openAnnounceSheet()">Write an announcement instead</button>`);
 }
 function needCardInline(nid) {
@@ -816,7 +834,7 @@ function rMyNetwork() {
   const circles = DB.circles[s.id];
   $('#screen').className = 'screen screen-anim';
   $('#screen').innerHTML = `
-  <div class="nav-large"><div class="kicker">Your people</div><h1>Support network</h1></div>
+  <div class="nav-large"><div class="kicker">Your people</div><h1>Partnership team</h1></div>
   <div class="section" style="margin-top:8px">
     <div class="card wash-teal tc" style="padding:22px 16px">
       <div style="font-size:30px">❦</div>
@@ -917,6 +935,14 @@ function rStudentProfile(sid) {
       <div class="meta mt-8" style="text-transform:none;font-family:var(--serif);font-size:13px;letter-spacing:0">${esc(s.bio)}</div>
     </div>
   </div>
+
+  ${own ? '' : `<div class="section">
+    <div class="card">
+      <div class="hstack">${ic('gift')} <h3 style="font-size:16px">Come alongside ${esc(s.name.split(' ')[0])}</h3></div>
+      <div class="body mt-4" style="font-size:14px">Prayer and presence come first here. When you’re ready to partner financially, it’s one tap to Global Year’s secure page.</div>
+      <button class="btn btn-soft btn-block btn-sm mt-12" onclick="openGiveSheet('${sid}')">${ic('link', 'ic sm')} Partner financially</button>
+    </div>
+  </div>`}
 
   <div class="segmented mt-16" style="margin-top:20px">
     ${segs.map((g) => `<button class="${seg === g ? 'on' : ''}" onclick="S.seg['${sid}']='${g}';render()">${g}</button>`).join('')}
@@ -1099,7 +1125,8 @@ function rNeedDetail(nid) {
       <div class="answered-banner mt-16"><div class="seal">♡</div><h3>This one’s covered</h3><p>Thank you for showing up. ${esc(n.committed[0] || '')}</p></div>` : mine ? `
       <button class="btn btn-forest btn-block mt-16" onclick="openCommitmentDoneSheet('${nid}')">${ic('check')} You’re helping — view your commitment</button>` : `
       <div class="mt-16 stack-8">
-        <button class="btn btn-primary btn-block" onclick="openCommitSheet('${nid}')">Claim this stub — I can help</button>
+        ${n.amount ? `<button class="btn btn-primary btn-block" onclick="openGiveSheet('${n.student}','${nid}')">Give toward this →</button>
+        <button class="btn btn-soft btn-block" onclick="openCommitSheet('${nid}')">Claim this stub — I can help another way</button>` : `<button class="btn btn-primary btn-block" onclick="openCommitSheet('${nid}')">Claim this stub — I can help</button>`}
         <div class="btn-row">
           <button class="btn btn-soft btn-sm" onclick="toast('You’re praying over this need','pray')">I’ll pray</button>
           <button class="btn btn-soft btn-sm" onclick="toast('Shared with your group — coordination beats duplication','send')">Share with my group</button>
@@ -1111,6 +1138,24 @@ function rNeedDetail(nid) {
   $('#screen .nav-btn').onclick = () => history.back();
 }
 
+function openGiveSheet(sid, nid) {
+  const s = student(sid);
+  const n = nid ? DB.needs.find((x) => x.id === nid) : null;
+  const linked = Donations.isLinked(sid);
+  const sum = Donations.summary(sid);
+  const url = Donations.giveUrl(sid);
+  openSheet(`
+    <h2>Partner financially with ${esc(s.name.split(' ')[0])}</h2>
+    <div class="sheet-sub">${n ? `Toward: ${esc(n.title.toLowerCase())}.` : 'Toward her year of ministry support.'} Giving happens on Global Year’s secure page — Kindred never handles the gift.</div>
+    <div class="card">
+      <div class="hstack">${ic('link')} <h3 style="font-size:15px">Global Year partnership account</h3></div>
+      <div class="meta" style="margin-top:8px">${esc((sum && sum.provider) || 'Bloomerang')} · designation ${esc(s.name.split(' ')[0].toUpperCase())} · tax-deductible</div>
+      <div class="body mt-8" style="font-size:14px">You’ll land on <b>${esc(url.replace('https://', '').split('?')[0])}</b> with ${esc(s.name.split(' ')[0])}’s designation already filled in. One-time or monthly.</div>
+    </div>
+    <div class="privacy-note mt-12">${ic('lock', 'ic sm')} <span>${esc(s.name.split(' ')[0])}’s support total updates quietly on her private goal. Anonymous giving is honored — she sees the gift, not necessarily your name.</span></div>
+    <button class="btn btn-gold btn-block mt-16" onclick="closeSheet();toast('Opening Global Year’s secure giving page…','link',3600)">Continue to secure giving →</button>
+    <button class="btn btn-ghost btn-block" onclick="closeSheet()">Not now</button>`);
+}
 function openCommitSheet(nid, step = 0, pick = {}) {
   const n = DB.needs.find((x) => x.id === nid);
   const s = student(n.student);
@@ -1229,20 +1274,24 @@ function rSupport() {
 function rSupportStudent() {
   const s = myStudent();
   const mine = DB.needs.filter((n) => n.student === s.id);
+  const sum = Donations.summary(s.id);
   $('#screen').className = 'screen screen-anim';
   $('#screen').innerHTML = `
-  <div class="nav-large"><div class="kicker">You’re allowed to ask</div><h1>Your needs</h1></div>
+  <div class="nav-large"><div class="kicker">It’s good to ask</div><h1>Your needs</h1></div>
   <div class="section" style="margin-top:8px">
     <button class="btn btn-primary btn-block" onclick="go('#/compose-need')">${ic('plus')} Add a need</button>
-    <div class="privacy-note mt-12">${ic('heart', 'ic sm')} <span>How can your community support you today? Asking clearly is a gift to the people who love you.</span></div>
+    <div class="privacy-note mt-12">${ic('heart', 'ic sm')} <span>How can your community come alongside you today? Naming a need clearly is a gift to the people God has sent to walk with you.</span></div>
   </div>
   <div class="section"><div class="stack-12">${mine.map((n) => needCard(n, { hideStudent: true })).join('')}</div></div>
   <div class="section">
     <div class="card wash-gold">
-      <div class="hstack">${ic('star')} <h3>Support goal — just for you</h3></div>
-      <div class="body mt-4">Your year is <b>68% funded</b>. Only you and the people you explicitly choose can see this number. No countdowns, no comparison, no pressure.</div>
-      <div class="progress mt-12"><i style="width:68%"></i></div>
-      <div class="progress-label"><span>Quiet progress</span><span>Visible to: Only me</span></div>
+      <div class="hstack">${ic('star')} <h3>Partnership goal — just for you</h3></div>
+      ${sum ? `
+      <div class="body mt-4">You’re <b>${sum.pct}% of the way</b> to your year of support ($${sum.raised.toLocaleString()} of $${sum.goal.toLocaleString()}), with <b>${sum.monthlyPartners} ministry partners</b> giving monthly. Only you and the people you choose ever see this number — no countdowns, no comparison, no pressure.</div>
+      <div class="progress mt-16"><i style="width:${sum.pct}%"></i></div>
+      <div class="progress-label"><span>Visible to: Only me</span><span>${esc(sum.provider)} · ${esc(sum.asOf)}</span></div>
+      <div class="meta" style="margin-top:12px">${ic('link', 'ic sm')} Synced from your Global Year partnership account · designation ${esc(sum.fundId)}</div>
+      ` : `<div class="body mt-4">Your partnership account isn’t linked yet. Global Year will connect it when they verify your profile.</div>`}
     </div>
   </div>`;
   renderTabs('support');
