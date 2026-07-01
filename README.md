@@ -37,15 +37,17 @@ The circle-based privacy model is *actually implemented*: switch personas and wa
 | [07 · Accessibility](docs/07-accessibility.md) | Dynamic Type, contrast, VoiceOver, haptics, and reduced motion |
 | [08 · Prototype guide](docs/08-prototype-guide.md) | Personas, seeded content, and step-by-step journey scripts |
 
-## A first look
+## The design language: "Between Two Places"
 
-| Supporter home | Student profile | Prayer detail | Wellbeing check-in |
-|---|---|---|---|
-| ![Supporter home](docs/screenshots/supporter-home.png) | ![Student profile](docs/screenshots/student-profile.png) | ![Prayer](docs/screenshots/prayer-detail.png) | ![Check-in](docs/screenshots/checkin.png) |
+Kindred does not look like other apps, on purpose. The entire visual system is a **field journal + airmail**: paper and ink, Fraunces serif and mono "postal" type, two-clock ribbons (`ANTIGUA 08:41 ····✈···· FRANKLIN 09:41 · DAY 92 OF 270`), perforated stamp portraits, ticket-stub needs you *claim*, a circular postmark that gets stamped onto a request when you pray, wax-sealed answered prayers, airmail-edged letters, and a coordinator's "sending ledger." No rounded card stacks, no pastel pills, no gradient avatars, no icon dock — the full rationale and the banned-pattern list live in [docs/00-design-brief.md](docs/00-design-brief.md).
 
-| Student home | Need detail | Coordinator dashboard | Onboarding |
+| Supporter home | Prayed = postmarked | Student home | Wellbeing check-in |
 |---|---|---|---|
-| ![Student home](docs/screenshots/student-home.png) | ![Need](docs/screenshots/need-detail.png) | ![Coordinator](docs/screenshots/coordinator.png) | ![Onboarding](docs/screenshots/onboarding.png) |
+| ![Supporter home](docs/screenshots/supporter-home.png) | ![Postmark](docs/screenshots/prayed-postmark.png) | ![Student home](docs/screenshots/student-home.png) | ![Check-in](docs/screenshots/checkin.png) |
+
+| Need = ticket stub | Coordinator ledger | Student profile | Encouragement wall |
+|---|---|---|---|
+| ![Need](docs/screenshots/need-detail.png) | ![Coordinator](docs/screenshots/coordinator.png) | ![Student profile](docs/screenshots/student-profile.png) | ![Wall](docs/screenshots/wall.png) |
 
 ## Grounding
 

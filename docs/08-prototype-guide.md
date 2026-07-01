@@ -23,7 +23,7 @@ Fulfilled need (Maya's art supplies) · open needs (postage $60, letters from ho
 ## The seven guided journeys
 
 **1 · A supporter discovers an urgent prayer request and commits to praying.**
-View as Jordan → Prayer tab (badge shows waiting urgent requests) → Sarah's "Peace about the timeline" sits under *Could use prayer today* → open it → press **I prayed for Sarah** (ripple, haptic, green settle, count 18→19) → optional "Let Sarah know you're praying" note → a private prayer note field only Jordan can see.
+View as Jordan → Prayer tab (badge shows waiting urgent requests) → Sarah's "Peace about the timeline" sits under *Could use prayer today* → open it → press **Stamp it — I prayed for Sarah**: a circular postmark ("PRAYED FOR SARAH · JUL 1 · 09:41") stamps onto the request with a haptic, the button becomes a dashed "stamped" outline, and the count ticks 18→19 → optional "Let Sarah know you're praying" note → a private prayer note field only Jordan can see.
 
 **2 · A supporter sees a practical need and offers to help.**
 View as Dana → Home shows "Needs you can help with" → **Care package postage** → *I can help* → choose what ("I can take care of this") → one-time vs ongoing, reminder toggle, anonymity → **Confirm — I'm in** → "Help is on the way 💛." The need now shows *You're helping with this*; it appears under Support → My commitments with a reminder; backing out is offered shame-free.

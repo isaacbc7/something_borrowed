@@ -1,106 +1,70 @@
-# 05 · Design system — "Kindred"
+# 05 · Design system — "Between Two Places"
 
-Warm, global, hopeful, personal, calm, premium. Faith-centered without visual cliché. Native iOS in spacing, hierarchy, and touch behavior. Everything below is implemented in `prototype/css/app.css`.
+The visual language of a **field journal and a bundle of airmail**: paper, ink, and three postal accents. Every component is derived from a physical object this community already trusts — envelopes, postmarks, postage stamps, ticket stubs, ledgers, taped photographs, wax seals. Nothing here could be mistaken for a default SwiftUI app, a wellness product, or a SaaS dashboard. See [docs/00-design-brief.md](00-design-brief.md) for the reasoning; everything below is implemented in `prototype/css/app.css`.
 
-## Color
+## Material & color
 
-### Foundations
+Two voices of paper, three inks, three postal accents. That's the whole palette.
+
 | Token | Value | Use |
 |---|---|---|
-| `canvas` | `#FAF7F2` | App background — warm off-white, never pure white or gray |
-| `card` | `#FFFFFF` | Elevated surfaces |
-| `ink` | `#1C2B3A` | Primary text (deep navy-ink, softer than black) |
-| `ink-2` | `#56657A` | Secondary text |
-| `ink-3` | `#8A96A6` | Tertiary/meta text |
-| `hairline` | `rgba(28,43,58,.10)` | Separators |
+| `paper` | `#F4EEE1` | The page — warm, grained (SVG turbulence overlay) |
+| `paper-bright` | `#FCF8EE` | Entries, slips, tickets |
+| `paper-deep` | `#EAE2CF` | Wells, pressed states |
+| `ink` | `#241D14` | Primary text — warm near-black |
+| `ink-2` / `ink-3` | `#6A5C49` / `#9C8E78` | Faded ink, pencil |
+| **`post-red`** | `#BF3B2B` | Bookmark ticks, airmail hatching, urgency-with-hope, the P.S. rule |
+| **`post-blue`** | `#274C77` | Postmarks, primary actions, flight lines, links |
+| **`wax`** | `#A9791F` | Seals, milestones, "needs care" marks |
+| `field-green` | `#4A6741` | Fulfilled / confirmed — field-note ink only |
 
-### Brand hues (each with a matching tint for washes/chips)
-| Token | Value | Meaning in the UI |
+Depth comes from **rules, perforations, and letterpress offsets** — hairlines, double rules under mastheads and above the tab bar, dashed perforation edges, hard `3px 3px 0` ink offsets on buttons. **Banned:** soft drop shadows, glassmorphism, gradient surfaces, pastel tint pills.
+
+## Typography — two voices
+
+| Voice | Face | Role |
 |---|---|---|
-| `navy` `#24425F` | primary actions, prayer surfaces, trust |
-| `forest` `#3E6B4F` | fulfillment, confirmation, "serving" season |
-| `teal` `#4E8D87` | community, coordination, links |
-| `clay` `#C4744F` | warmth, family, encouragement |
-| `gold` `#D99A3D` | milestones, "support moments," answered prayer, urgency-with-hope |
-| `sky` `#A9C7DB` | gentle nudges, information |
+| **The human writing** | [Fraunces](https://fonts.google.com/specimen/Fraunces) (OFL, variable, optical sizing — vendored in `prototype/fonts/`) | Headlines (33px/560 at high optical size), names, body (15–16px/1.5), big ledger numerals. Italic for quotes, asides, "P.S." lines, and students' own words. |
+| **The postal system** | IBM Plex Mono (OFL, vendored) | Every label, tag, date, count, button, caption, tab. Uppercase, +0.08–0.16em tracking, 8.5–12px. |
 
-Semantic: success `#3E7C5B`, caution/danger `#B4533A` (used sparingly — this app avoids alarm-red).
-Rule of thumb: **gold is for hope-flavored urgency; red never pressures a student's need.** Gradients appear only in avatar fills, photo placeholders, and the onboarding sky — never on text surfaces.
+The system sans-serif appears **nowhere**. Set Fraunces headlines with `font-variation-settings: 'opsz' 60` for the display cut. On-device equivalents: Fraunces ships with the app; Plex Mono falls back to SF Mono gracefully.
 
-## Typography
+## Signature components (all implemented)
 
-System stack (SF Pro on device). Tracking tightens as size grows, per Apple convention.
-
-| Style | Size/weight | Use |
-|---|---|---|
-| Large Title | 32/800, −0.022em | Screen greetings ("Good morning, Dana") |
-| Title 2 | 26/800 | Detail-screen headlines |
-| Section | 20/750 | Section heads ("Needs you can help with") |
-| Card title | 17/700 | Card headlines |
-| Body | 15–16/400, 1.45–1.55 lh | Content, stories |
-| Subhead | 13/600 | Row subtitles, meta |
-| Kicker | 13/600 uppercase, +0.04em | Context lines ("TUESDAY, JULY 1") |
-| Caption | 11.5–12/600 | Tab labels, timestamps |
-
-Full Dynamic Type support is a requirement (see accessibility doc). Numerals in stats use the display weight (800) to feel confident without shouting.
-
-## Spacing, shape, elevation
-
-- **4pt grid.** Screen margins 20pt; card padding 16pt; stack gaps 8/12pt; section rhythm 22–24pt.
-- **Radii:** cards 20pt · buttons 14pt · sheets 28pt top · chips/pills full-round.
-- **Elevation:** one soft card shadow (`0 1px 2px + 0 6px 20px` at 5–6% ink) and one floating shadow for sheets/toasts. No borders heavier than a hairline.
-- **Touch targets:** ≥44pt everywhere; primary buttons 50pt; the "I Prayed" button 58pt — the most important tap in the app is the easiest.
-
-## Iconography
-
-SF Symbols on device (prototype uses matching 24pt stroke SVGs, 1.8pt weight, round caps).
-
-| Concept | SF Symbol |
+| Component | Form |
 |---|---|
-| Home | `house` · Students `person.2` · Support `gift` · Prayer `hands.and.sparkles` (custom folded-hands glyph in brand set) · Profile `person.crop.circle` |
-| Prayer actions | custom praying-hands; `checkmark` on completion |
-| Needs | category-mapped: `airplane`, `shippingbox`, `phone`, `heart`, `fork.knife`, `cross.case`, `house.lodge` |
-| Privacy | `lock`, `eye`, `shield` — always paired with plain-language copy |
-| Milestones | `birthday.cake`, `star`, `globe.americas`, `calendar` |
+| **Masthead** | Wordmark line over a rule ("KINDRED — A GLOBAL YEAR CORRESPONDENCE"), mono dateline ("VOL. I · SEP–MAY · TUESDAY, JULY 1"), oversized serif headline ending in a period. |
+| **Two-clock ribbon** | `ANTIGUA 08:41 ····✈···· FRANKLIN 09:41 · DAY 92 OF 270` between hairlines. Appears wherever a student appears at full width. Countdown variant for pre-departure: `T−63 DAYS`. |
+| **Stamp portrait** | Square postage stamp: perforated edge (radial-gradient punch holes), duotone paper fill, serif initials in matching ink. Status dot sits outside the frame. |
+| **Ticket (need)** | Entry with a perforated tear-off stub on the left edge and a punch hole. Commit = **"Claim this stub."** |
+| **Flight-line progress** | Dotted route with a solid ink-blue traveled segment and a small plane at the current position; `✓` replaces the plane when fulfilled. Never a rounded bar. |
+| **Postmark (prayer)** | The "I prayed" action stamps a rotated circular date stamp — double ring, ink-blue, uneven ink via mask — onto the request. Counts read `PRAYED ×18`. The button's stamped state becomes a dashed outline. |
+| **Wax seal (answered)** | Radial gold seal with embossed ✳ on cream; serif-italic caption. Reverent, not confetti. |
+| **Letter (encouragement)** | Airmail red/blue hatched top edge, mono sender line with `[NOTE] [VERSE] [VOICE] [PHOTO]` tags, serif body, dotted-rule footer. Wall letters sit ±0.5° askew. |
+| **Ledger (coordinator)** | Ruled entries with colored marginal rails (wax = needs care, blue = milestone, green = well supported) and mono fact lines prefixed with em-dashes. |
+| **Inner weather (check-in)** | Boxed typographic weather glyphs (✹ ≈ ☼ ✈ ☾ ☂ ≋ ✚) with mono labels; selection outlines in post-red. |
+| **P.S. nudge** | Red left rule + mono "P.S." + serif italic line. The no-guilt pattern. |
+| **Index tab bar** | Double rule on top; five numbered mono entries (01 HOME … 05 PROFILE); active tab gets a red bookmark tick. No icons. |
+| **Telegram toast** | Paper strip with airmail hatched top/bottom edges, mono uppercase message, hard offset. |
+| **Journal cover (onboarding)** | Post-blue cover with double-rule frame, gold page marks, serif title, typographic ornaments (✈ ✉ ☼) — no emoji anywhere in the system. |
+| **Taped photo** | Duotone halftone image plate, 6px paper border, tape strip, −0.8° rotation, hard shadow. Art direction: student-shot, street-level, ordinary moments. |
 
-Icons never carry meaning alone; every icon has an adjacent label.
+## Standard components, restyled
 
-## Component library (all implemented)
+Buttons (letterpress, mono-caps, press = translate into the shadow) · choices (square mono tags, ink fill when selected) · switches (rectangular, ink thumb) · inputs (ruled paper, serif entry text) · segmented controls (underline index tabs with red tick) · sheets (paper slip under a double rule, stitched grabber) · empty states (large rotated ornament in post-red + serif headline + one action).
 
-**Containers** — Card (+ five tinted "washes"), List/Row (56pt, hairline-inset), Sheet (grabber, spring-in), Toast (bottom-floating, auto-dismiss).
-**Controls** — Button (primary/gold/forest/soft/ghost/danger-soft × block/sm), Chip (7 tints), Choice pill (single/multi select), Segmented control, Switch row (title + explanation + toggle), Input/TextArea, Step dots.
-**Identity** — Avatar (24→96pt, 6 gradient hues, initials fallback), avatar stack, status dot (thriving/care/milestone).
-**Content** — Need card (category icon, urgency chip, progress bar, coordination line), Prayer card (count, visibility chip, urgency), Update card (author, audience chip, photo, gentle reactions), Wall note (kind-tinted), Milestone timeline (gold "soon" emphasis), Stat trio, Signal card (coordinator; colored left rail), Nudge (sky tint — the no-guilt pattern), Privacy note (lock + plain language).
-**Moments** — "I Prayed" button (ripple + green settle + haptic), Answered-prayer banner (gold glow-in), Mood grid (emoji + spring scale), Empty state (art, headline, kind copy, one action).
+## Motion & haptics
 
-## Micro-interactions & haptics
+Dry and physical, like paper: screens rise 8px in 240ms; the postmark and "stamped" states land with a `scale(1.12) → 1` stamp-in and a medium haptic; sheets slide with a short spring; buttons translate into their own shadow. No bounces, no glows, no confetti. `prefers-reduced-motion`: stamp-in becomes a fade, translations become cross-fades.
 
-| Moment | Feedback |
-|---|---|
-| "I Prayed" | medium impact haptic + ripple + color settle to forest green — warm, not gamified |
-| Commitment confirmed | success haptic + "Help is on the way 💛" toast |
-| Answered prayer | glow-in banner; no confetti — reverence over celebration theatrics |
-| Mood selection | light haptic + 1.04 spring scale |
-| Card taps | 0.985 scale press state |
-| Screen transitions | 280ms ease-out fade/rise; sheets 320ms spring |
+## Voice fused with form
 
-## Photography & illustration direction
+"Today's dispatch" · "The sending ledger" · "Inner weather" · "Claim this stub" · "Stamp it — I prayed for Sarah" · "Postmarked. It will arrive on Aug 3." · "P.S. — it's been a little while since you wrote Elijah." The postal vocabulary is a costume for warmth; function words (Home, Students, Support, Prayer, Profile, "Mark fulfilled") stay plain.
 
-Large, human-centered, student-shot photography: real classrooms, muddy soccer fields, language-school notebooks, hands, tables, cities at street level. No stock church imagery, no drone-hero-shots, no poverty tourism. Prototype uses warm gradient placeholders with captions to art-direct without stock photos. Emoji appear as *warmth accents* in moods and toasts only — never as functional icons.
+## States
 
-## UI states (designed, not an afterthought)
+Empty states explain *why* (privacy-empty vs. nothing-exists) with a typographic ornament and one action. Success = state change in place (postmark, claimed stub, seal) plus a telegram strip. Errors are inline, specific, blame-free. Loading (spec): skeleton rules and grayed stamps, not shimmering cards.
 
-| State | Pattern | Example in prototype |
-|---|---|---|
-| Empty | art + honest headline + one clear action; empties caused by privacy say so kindly | "Nothing shared with you yet — what you see is what they've chosen for you" |
-| Loading | skeleton cards mirroring layout (spec; not simulated in static prototype) | — |
-| Success | toast + state change in place; big moments get banners | commitment, answered prayer |
-| Error | inline, specific, blame-free, with retry; never a bare alert | "That invite code didn't match — codes expire after 14 days. Ask for a fresh one." |
-| Privacy state | first-class: content hidden by audience renders an explanatory empty, never a lock-tease of hidden content | Jordan viewing Elijah's Updates |
+## Accessibility deltas from v1
 
-## Voice & microcopy rules
-
-Warm, direct, second-person; never guilt, never hype. The words carry the brand:
-- "How can your community support you today?" · "You are not carrying this alone." · "Help is already on the way." · "Choose who can see this." · "Thank you for showing up." · "This prayer has been answered."
-- Students are people, not projects: never "sponsor a student," "campaign," "donor target," or completion percentages on a person.
-- Every privacy control is explained in one human sentence at the point of use.
+Contrast is higher than v1 (ink on paper ≈ 13:1; post-blue on paper ≈ 7.3:1; wax on cream ≥ 4.6:1 at label sizes). Mono microcopy never goes below 8.5px in the prototype and maps to iOS Caption2 with full Dynamic Type scaling. Glyphs (☂, ✈) always pair with words. The postmark state is announced by VoiceOver as "Stamped — you prayed for Sarah." All other commitments in [07 · Accessibility](07-accessibility.md) hold.
